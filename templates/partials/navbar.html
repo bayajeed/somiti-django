@@ -1,0 +1,82 @@
+{% load static %}
+
+
+    <!-- Main Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <!-- Brand Logo -->
+            <a class="navbar-brand" href="#">
+                <div class="logo-icon">
+                    <i class="bi bi-rocket-takeoff"></i>
+                </div>
+                <span class="logo-text">Mirpur Electrical Shomiti</span>
+            </a>
+
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    style="border: none; background: transparent;">
+                <i class="bi bi-list" style="font-size: 1.5rem; color: var(--text-primary);"></i>
+            </button>
+
+            <!-- Navigation Items -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">
+                            <i class="bi bi-house-door"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">
+                            <i class="bi bi-stars"></i>
+                            Features
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" 
+                           data-bs-auto-close="outside" aria-expanded="false">
+                            <i class="bi bi-folder"></i>
+                            Pages
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#about">
+                                <i class="bi bi-info-circle"></i>About Us
+                            </a></li>
+                            <li><a class="dropdown-item" href="#services">
+                                <i class="bi bi-gear"></i>Services
+                            </a></li>
+                            <li><a class="dropdown-item" href="#portfolio">
+                                <i class="bi bi-briefcase"></i>Portfolio
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#contact">
+                                <i class="bi bi-envelope"></i>Contact
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#support">
+                            <i class="bi bi-headset"></i>
+                            Support
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Auth Buttons & Theme Toggle -->
+                <div class="auth-buttons">
+                    <button class="btn btn-auth btn-signin">
+                        <i class="bi bi-box-arrow-in-right"></i>
+                        Sign In
+                    </button>
+                    <button class="btn btn-auth btn-signup">
+                        <i class="bi bi-person-plus"></i>
+                        Sign Up
+                    </button>
+                    <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                        <i class="bi bi-sun-fill" id="themeIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>

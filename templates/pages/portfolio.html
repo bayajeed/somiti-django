@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Portfolio {% endblock %}
+
+
+
+{% block content %}
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Our Portfolio</h2>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+            <li data-filter="*" class="filter-active">All</li>
+            <li data-filter=".filter-transformer">Transformer</li>
+            <li data-filter=".filter-generator">Generator</li>
+            <li data-filter=".filter-lift">Lift</li>
+            <li data-filter=".filter-solar">Solar</li>
+          </ul><!-- End Portfolio Filters -->
+
+          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-transformer ">
+              <img src="{% static 'assets/img/masonry-portfolio/transformer-1.webp' %}" class="img-fluid" alt="transformer">
+              <div class="portfolio-info">
+                <h4>Transformer 1</h4>
+                <p>This is a high-quality transformer.</p>
+                <a href="{% static 'assets/img/masonry-portfolio/transformer-1.webp' %}" title="Transformer" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-generator">
+              <img src="{% static 'assets/img/masonry-portfolio/generator-4.webp' %}" class="img-fluid" alt="generator">
+              <div class="portfolio-info">
+                <h4>Generator 1</h4>
+                <p>Lorem ipsum, dolor sit</p>
+                <a href="{% static 'assets/img/masonry-portfolio/generator-4.webp' %}" title="Generator 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-lift">
+              <img src="{% static 'assets/img/masonry-portfolio/lift-9.webp' %}" class="img-fluid" alt="lift">
+              <div class="portfolio-info">
+                <h4>Lift 1</h4>
+                <p>Lift in operation with high efficiency.</p>
+                <a href="{% static 'assets/img/masonry-portfolio/lift-9.webp' %}" title="Lift 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-solar">
+              <img src="{% static 'assets/img/solar/solar-2.webp' %}" class="img-fluid" alt="solar">
+              <div class="portfolio-info">
+                <h4>Solar Panel</h4>
+                <p>Solar panel best quality.</p>
+                <a href="{% static 'assets/img/solar/solar-2.webp' %}" title="Solar Panel" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-transformer">
+              <img src="{% static 'assets/img/masonry-portfolio/transformer-2.webp' %}" class="img-fluid" alt="transformer">
+              <div class="portfolio-info">
+                <h4>Transformer 2</h4>
+                <p>This is a high-quality transformer.</p>
+                <a href="{% static 'assets/img/masonry-portfolio/transformer-2.webp' %}" title="Transformer 2" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-generator">
+              <img src="{% static 'assets/img/masonry-portfolio/generator-5.webp' %}" class="img-fluid" alt="generator">
+              <div class="portfolio-info">
+                <h4>Generator 2</h4>
+                <p>Lorem ipsum, dolor sit</p>
+                <a href="{% static 'assets/img/masonry-portfolio/generator-5.webp' %}" title="Generator 2" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-lift">
+              <img src="{% static 'assets/img/masonry-portfolio/lift-8.webp' %}" class="img-fluid" alt="lift">
+              <div class="portfolio-info">
+                <h4>Lift 2</h4>
+                <p>Lorem ipsum, dolor sit</p>
+                <a href="{% static 'assets/img/masonry-portfolio/lift-8.webp' %}" title="Lift 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-transformer">
+              <img src="{% static 'assets/img/masonry-portfolio/transformer-3.webp' %}" class="img-fluid" alt="transformer">
+              <div class="portfolio-info">
+                <h4>Transformer 3</h4>
+                <p>Lorem ipsum, dolor sit</p>
+                <a href="{% static 'assets/img/masonry-portfolio/transformer-3.webp' %}" title="Transformer 3" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-generator">
+              <img src="{% static 'assets/img/masonry-portfolio/generator-6.webp' %}" class="img-fluid" alt="generator">
+              <div class="portfolio-info">
+                <h4>Generator 3</h4>
+                <p>Lorem ipsum, dolor sit</p>
+                <a href="{% static 'assets/img/masonry-portfolio/generator-6.webp' %}" title="Generator 3" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-lift">
+              <img src="{% static 'assets/img/masonry-portfolio/lift-7.webp' %}" class="img-fluid" alt="lift">
+              <div class="portfolio-info">
+                <h4>Lift 1</h4>
+                <p>Lorem ipsum, dolor sit</p>
+                <a href="{% static 'assets/img/masonry-portfolio/lift-7.webp' %}" title="Lift 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+          </div><!-- End Portfolio Container -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Portfolio Section -->
+
+    {% endblock %}

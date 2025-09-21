@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Uniko Power {% endblock %}
+
+
+
+{% block content %}
+    <!-- Services Section -->
+<!-- About Section -->
+    <section id="about" class="about section">
+
+      <div class="container">
+
+        <div class="row position-relative">
+
+          <div class="col-lg-7 about-img" data-aos="zoom-out" data-aos-delay="200"><img src="{% static 'assets/img/about.webp' %}"></div>
+
+          <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
+            <h2 class="inner-title">Sustainable Energy <br> Better Future</h2>
+            <div class="our-story">
+              <h4>Est 2009</h4>
+              <h3>Our Story</h3>
+              <p>Uniko Power provides trusted energy solutions since 2009. We deliver Transformers, Solar Panels, Lifts, and Generators with full installation, service, and support—ensuring reliable and sustainable power for businesses and communities.</p>
+              <ul>
+                <li><i class="bi bi-check-circle"></i> <span>Expertise in power & energy solutions</span></li>
+                <li><i class="bi bi-check-circle"></i> <span>Complete service from making to maintenance</span></li>
+                <li><i class="bi bi-check-circle"></i> <span>Customer-focused support</span></li>
+              </ul>
+              <p>At Uniko Power, our promise is simple—reliable power, trusted service.</p>
+
+              <div class="watch-video d-flex align-items-center position-relative">
+                <i class="bi bi-play-circle"></i>
+                <a href="https://youtu.be/Za6hZSjSjBg" class="glightbox stretched-link">Watch Video</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+{% endblock %}

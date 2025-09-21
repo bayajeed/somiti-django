@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Blog {% endblock %}
+
+{% block content %}
+<!-- Page Title -->
+<div class="page-title accent-background">
+  <div class="container d-lg-flex justify-content-between align-items-center">
+    <h1 class="mb-2 mb-lg-0">Our Products</h1>
+    <nav class="breadcrumbs">
+      <ol>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li class="current">Products</li>
+      </ol>
+    </nav>
+  </div>
+</div><!-- End Page Title -->
+
+<!-- Blog Posts Section -->
+<section id="blog-posts" class="blog-posts section">
+  <div class="container">
+    <div class="row gy-4">
+
+      <!-- Lift -->
+      <div class="col-lg-4">
+        <article class="position-relative h-100">
+          <div class="post-img position-relative overflow-hidden">
+            <img src="{% static 'assets/img/lift/lift-5.webp' %}" class="img-fluid" alt="Lift">
+            <span class="post-date">Product</span>
+          </div>
+          <div class="post-content d-flex flex-column">
+            <h3 class="post-title">Lift Solutions</h3>
+            <div class="meta d-flex align-items-center">
+              <i class="bi bi-person"></i> <span class="ps-2">Unikobazar</span>
+            </div>
+            <p>Safe, durable, and modern elevators designed for smooth vertical transport.</p>
+            <hr>
+            <a href="#" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Transformer -->
+      <div class="col-lg-4">
+        <article class="position-relative h-100">
+          <div class="post-img position-relative overflow-hidden">
+            <img src="{% static 'assets/img/about.webp' %}" class="img-fluid" alt="Transformer">
+            <span class="post-date">Product</span>
+          </div>
+          <div class="post-content d-flex flex-column">
+            <h3 class="post-title">Power Transformers</h3>
+            <div class="meta d-flex align-items-center">
+              <i class="bi bi-person"></i> <span class="ps-2">Unikobazar</span>
+            </div>
+            <p>High-efficiency transformers for stable and reliable electricity distribution.</p>
+            <hr>
+            <a href="#" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Solar -->
+      <div class="col-lg-4">
+        <article class="position-relative h-100">
+          <div class="post-img position-relative overflow-hidden">
+            <img src="{% static 'assets/img/solar/solar-5.webp' %}" class="img-fluid" alt="Solar">
+            <span class="post-date">Product</span>
+          </div>
+          <div class="post-content d-flex flex-column">
+            <h3 class="post-title">Solar Power Systems</h3>
+            <div class="meta d-flex align-items-center">
+              <i class="bi bi-person"></i> <span class="ps-2">Unikobazar</span>
+            </div>
+            <p>Eco-friendly solar solutions to reduce energy cost and ensure sustainability.</p>
+            <hr>
+            <a href="#" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Generator -->
+      <div class="col-lg-4">
+        <article class="position-relative h-100">
+          <div class="post-img position-relative overflow-hidden">
+            <img src="{% static 'assets/img/generator/generator-1.webp' %}" class="img-fluid" alt="Generator">
+            <span class="post-date">Product</span>
+          </div>
+          <div class="post-content d-flex flex-column">
+            <h3 class="post-title">Backup Generators</h3>
+            <div class="meta d-flex align-items-center">
+              <i class="bi bi-person"></i> <span class="ps-2">Unikobazar</span>
+            </div>
+            <p>Reliable backup generators to keep your business running during outages.</p>
+            <hr>
+            <a href="#" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+
+      <!-- MDB -->
+      <div class="col-lg-4">
+        <article class="position-relative h-100">
+          <div class="post-img position-relative overflow-hidden">
+            <img src="{% static 'assets/img/main-distribution-board/distribution-board-2.webp' %}" class="img-fluid" alt="MDB">
+            <span class="post-date">Product</span>
+          </div>
+          <div class="post-content d-flex flex-column">
+            <h3 class="post-title">Main Distribution Board (MDB)</h3>
+            <p>Centralized electrical power distribution with complete safety and control.</p>
+            <hr>
+            <a href="#" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+
+      <!-- DB -->
+      <div class="col-lg-4">
+        <article class="position-relative h-100">
+          <div class="post-img position-relative overflow-hidden">
+            <img src="{% static 'assets/img/main-distribution-board/distribution-board-1.webp' %}" class="img-fluid" alt="DB">
+            <span class="post-date">Product</span>
+          </div>
+          <div class="post-content d-flex flex-column">
+            <h3 class="post-title">Distribution Board (DB)</h3>
+            <p>Efficient and secure power distribution for residential and industrial setups.</p>
+            <hr>
+            <a href="#" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+
+      <!-- LT Switchgear -->
+      <div class="col-lg-4">
+        <article class="position-relative h-100">
+          <div class="post-img position-relative overflow-hidden">
+            <img src="{% static 'assets/img/main-distribution-board/distribution-board-3.webp' %}" class="img-fluid" alt="LT Switchgear">
+            <span class="post-date">Product</span>
+          </div>
+          <div class="post-content d-flex flex-column">
+            <h3 class="post-title">LT Switchgear</h3>
+            <p>Low tension switchgear ensuring safe and reliable power management.</p>
+            <hr>
+            <a href="#" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+
+      <!-- PFI -->
+      <div class="col-lg-4">
+        <article class="position-relative h-100">
+          <div class="post-img position-relative overflow-hidden">
+            <img src="{% static 'assets/img/pfi-plant/pfi-plant-1.webp' %}" class="img-fluid" alt="PFI Plant">
+            <span class="post-date">Product</span>
+          </div>
+          <div class="post-content d-flex flex-column">
+            <h3 class="post-title">PFI Plant</h3>
+            <p>Power Factor Improvement Plant for reducing electricity bills and losses.</p>
+            <hr>
+            <a href="#" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+
+      <!-- বাকি গুলো (HT Cable, LT Cable, HTCT, LTCT, Drop Out Fuse, Lightning Arrester, HT Switchgear) একইভাবে structure এ add করা যাবে -->
+      
+    </div>
+  </div>
+</section><!-- /Blog Posts Section -->
+
+{% endblock %}
