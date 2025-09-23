@@ -1,0 +1,80 @@
+/** Colors **/
+$primary: #fe6b2a;
+$secondary: #35353a;
+$white: #fff;
+$black: #000;
+$dark: #0c0c0e;
+$light: #f4f4f4;
+$body-bg: $dark;
+$body-color: $light;
+$navbar-nav-border-color: $white;
+
+/** Units of Measure **/
+
+//nav
+$navbar-nav-border-size: 0.1rem;
+$navbar-nav-border-radius-size: 3.125rem;
+$navbar-padding-y-val: 1rem;
+$navbar-nav-link-padding-x-val: 1rem;
+$navbar-brand-logo-width: 100%;
+$navbar-toggler-padding-x-val: 0.6rem;
+$navbar-toggler-padding-y-val: 0.3rem;
+
+//header
+$header-min-height-val: 37.5rem;
+$header-vertical-decoration-width: 1.5rem;
+$header-vertical-decoration-top: 12%;
+$header-vertical-decoration-right: 0;
+
+//utilities
+$cards-min-height: 32.875rem;
+
+/** Sections **/
+//expertise
+$expertise-cards-min-height: 21.875rem;
+
+//pricing
+$pricing-card-min-height: 35rem;
+$cards-border-size: 0.125rem;
+$pricing-card-price-size: 3rem;
+$pricing-card-title: 2.5rem;
+// $pricing-card-list-items-fs:
+
+/** Fonts **/
+$xl-text-size: 1rem * 4.0625;
+$xl-text-size-mobile: 1rem * 3.125;
+
+$primary-font: 'Poppins', sans-serif;
+//$secondary-font: example;
+
+/** Bootstrap Components **/
+
+//navbar
+//$navbar-toggler-focus-width: 1rem !default;
+$navbar-light-color: $white !default;
+$navbar-light-icon-color: $white !default;
+$navbar-dark-color: $white !default;
+$navbar-light-toggler-border-color: $white !default;
+$navbar-nav-link-padding-x: $navbar-nav-link-padding-x-val !default;
+$navbar-padding-y: $navbar-padding-y-val !default;
+$navbar-toggler-padding-y: $navbar-toggler-padding-y-val !default;
+$navbar-toggler-padding-x: $navbar-toggler-padding-x-val !default;
+
+//Spacers
+$spacer: 1rem !default;
+$spacers: (
+	0: 0,
+	1: $spacer * 0.25,
+	2: $spacer * 0.5,
+	3: $spacer,
+	4: $spacer * 1.5,
+	5: $spacer * 3,
+	6: $spacer * 6,
+	7: $spacer * 9,
+	8: $spacer * 12,
+) !default;
+
+//Typography
+$line-height-base: 1.7 !default;
+// //Headings (h1,h2,h3...)
+$headings-margin-bottom: $spacer * 1 !default;

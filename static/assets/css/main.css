@@ -272,7 +272,7 @@
         }
 
         .navbar-nav .nav-link:hover {
-            background: rgba(79, 70, 229, 0.08);
+            background: rgba(105, 99, 233, 0.08);
             color: var(--brand-primary) !important;
             transform: translateY(-1px);
             box-shadow: 0 2px 8px rgba(79, 70, 229, 0.15);
