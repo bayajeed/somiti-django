@@ -1,0 +1,6 @@
+#main-header {
+	background: bg-img-dark-overlay('../img/header-background.jpg', 0.5, 0.5) left
+		center no-repeat;
+	background-size: cover;
+	min-height: $header-min-height-val;
+}
