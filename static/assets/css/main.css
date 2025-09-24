@@ -272,7 +272,7 @@
         }
 
         .navbar-nav .nav-link:hover {
-            background: rgba(79, 70, 229, 0.08);
+            background: rgba(105, 99, 233, 0.08);
             color: var(--brand-primary) !important;
             transform: translateY(-1px);
             box-shadow: 0 2px 8px rgba(79, 70, 229, 0.15);
@@ -558,13 +558,51 @@
 
 
 
+/*****************   Marquee Slider *************** */
+/* Marquee Styles */
+.marquee-container {
+  overflow: hidden;
+  position: relative;
+  background-color: var(--bs-body-bg);
+  border-top: 1px solid var(--bs-border-color);
+  border-bottom: 1px solid var(--bs-border-color);
+}
+
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: scroll-left 18s linear infinite;
+}
+
+.marquee-container:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-item {
+  margin-right: 2rem;
+  font-weight: 500;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  color: var(--bs-body-color);
+  transition: color 0.3s ease;
+}
+
+.marquee-item:hover {
+  color: var(--bs-body-color);  /* hover এ body color হবে */
+}
+
+@keyframes scroll-left {
+  from { transform: translateX(0%); }
+  to   { transform: translateX(-50%); }
+}
+
+
 
 /*****************   Carousel  Slider *************** */
 
 .carousel {
   width: 100vw;
   height: 100vh;
-  margin-top: -50px;
+  margin-top: 50px;
   overflow: hidden;
   position: relative;
 }
