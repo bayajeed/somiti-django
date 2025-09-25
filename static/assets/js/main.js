@@ -1,32 +1,49 @@
 // ================================
-        // TOPBAR FUNCTIONALITY
+        // HEADER PADDING ADJUSTMENT
         // ================================
         const topbar = document.querySelector('.topbar');
         const navbar = document.querySelector('.navbar-custom');
-        const topbarClose = document.getElementById('topbarClose');
-        let topbarClosed = false; // Changed: Don't check localStorage, always start with topbar visible
-        let lastScrollTop = 0;
-        let isTopbarVisible = true; // Changed: Always start with topbar visible
+        const marquee = document.querySelector('.marquee-container');
 
-        // Topbar close button functionality
+        function adjustBodyPadding() {
+            const topbarHeight = topbar.classList.contains('hidden') ? 0 : topbar.offsetHeight;
+            const navbarHeight = navbar.offsetHeight;
+            const totalHeight = topbarHeight + navbarHeight;
+            document.body.style.paddingTop = totalHeight + 'px';
+        }
+
+        // ================================
+        // TOPBAR FUNCTIONALITY
+        // ================================
+        const topbarClose = document.getElementById('topbarClose');
+        let topbarClosed = false;
+        let lastScrollTop = 0;
+        let isTopbarVisible = true;
+
         topbarClose.addEventListener('click', function() {
             hideTopbar();
-            topbarClosed = true; // Only set for current session, don't save to localStorage
+            topbarClosed = true;
         });
 
         function hideTopbar() {
             topbar.classList.add('hidden');
             navbar.classList.add('topbar-hidden');
-            document.body.style.paddingTop = '80px';
+            adjustBodyPadding();
             isTopbarVisible = false;
         }
 
         function showTopbar() {
             topbar.classList.remove('hidden');
             navbar.classList.remove('topbar-hidden');
-            document.body.style.paddingTop = '120px';
+            adjustBodyPadding();
             isTopbarVisible = true;
         }
+
+        // Adjust padding on initial load
+        window.addEventListener('load', adjustBodyPadding);
+        // Adjust padding on window resize
+        window.addEventListener('resize', adjustBodyPadding);
+
 
         // ================================
         // SCROLL FUNCTIONALITY
@@ -34,23 +51,19 @@
         window.addEventListener('scroll', function() {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
-            // Hide topbar on scroll down (if not already closed)
             if (!topbarClosed) {
                 if (scrollTop > lastScrollTop && scrollTop > 100) {
-                    // Scrolling down
                     if (isTopbarVisible) {
                         hideTopbar();
                     }
                 } else if (scrollTop < lastScrollTop && scrollTop < 50) {
-                    // Scrolling up to top
                     if (!isTopbarVisible) {
                         showTopbar();
                     }
                 }
             }
 
-            // Add blur effect to navbar after scrolling 500px
-            if (scrollTop > 500) {
+            if (scrollTop > 50) {
                 navbar.classList.add('navbar-scrolled');
             } else {
                 navbar.classList.remove('navbar-scrolled');

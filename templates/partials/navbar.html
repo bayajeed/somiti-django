@@ -5,7 +5,7 @@
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container">
             <!-- Brand Logo -->
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{% url 'home' %}">
                 <div class="logo-icon">
                     <i class="bi bi-rocket-takeoff"></i>
                 </div>
@@ -22,57 +22,91 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#home">
+                        <a class="nav-link" href="{% url 'home' %}">
                             <i class="bi bi-house-door"></i>
                             Home
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#features">
-                            <i class="bi bi-stars"></i>
-                            Features
                         </a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" 
                            data-bs-auto-close="outside" aria-expanded="false">
                             <i class="bi bi-folder"></i>
-                            Pages
+                            About Us
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#about">
                                 <i class="bi bi-info-circle"></i>About Us
                             </a></li>
                             <li><a class="dropdown-item" href="#services">
-                                <i class="bi bi-gear"></i>Services
+                                <i class="bi bi-gear"></i>History
                             </a></li>
                             <li><a class="dropdown-item" href="#portfolio">
-                                <i class="bi bi-briefcase"></i>Portfolio
+                                <i class="bi bi-briefcase"></i>Mission & Vision
                             </a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#contact">
-                                <i class="bi bi-envelope"></i>Contact
+                                <i class="bi bi-envelope"></i>Activities
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" 
+                           data-bs-auto-close="outside" aria-expanded="false">
+                            <i class="bi bi-folder"></i>
+                            Members
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#about">
+                                <i class="bi bi-info-circle"></i>Committee
+                            </a></li>
+                            <li><a class="dropdown-item" href="#services">
+                                <i class="bi bi-gear"></i>Member List
+                            </a></li>
+                            <li><a class="dropdown-item" href="#portfolio">
+                                <i class="bi bi-briefcase"></i>Membership Rules
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" 
+                           data-bs-auto-close="outside" aria-expanded="false">
+                            <i class="bi bi-folder"></i>
+                            News & Events
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#about">
+                                <i class="bi bi-info-circle"></i>Latest News
+                            </a></li>
+                            <li><a class="dropdown-item" href="#services">
+                                <i class="bi bi-gear"></i>Upcoming Events
+                            </a></li>
+                            <li><a class="dropdown-item" href="#portfolio">
+                                <i class="bi bi-briefcase"></i>Notice Board
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#contact">
+                                <i class="bi bi-envelope"></i>Gallery
                             </a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#support">
-                            <i class="bi bi-headset"></i>
-                            Support
+                        <a class="nav-link" href="{% url 'contact' %}">
+                            <i class="bi bi-house-door"></i>
+                            Contuct Us
                         </a>
                     </li>
                 </ul>
 
                 <!-- Auth Buttons & Theme Toggle -->
                 <div class="auth-buttons">
-                    <button class="btn btn-auth btn-signin">
+                    <!-- <button class="btn btn-auth btn-signin">
                         <i class="bi bi-box-arrow-in-right"></i>
                         Sign In
                     </button>
                     <button class="btn btn-auth btn-signup">
                         <i class="bi bi-person-plus"></i>
                         Sign Up
-                    </button>
+                    </button> -->
                     <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
                         <i class="bi bi-sun-fill" id="themeIcon"></i>
                     </button>
@@ -80,42 +114,3 @@
             </div>
         </div>
     </nav>
-
-
-
-
-<!-- Marquee Bar -->
-<div class="container-fluid py-2">
-  <div class="marquee-container rounded">
-    <div class="marquee-track">
-      <!-- Items (duplicate for seamless loop) -->
-      <a href="#update" class="marquee-item d-flex align-items-center gap-2 text-decoration-none">
-        <span>🔔</span><span>নতুন আপডেট: অর্ডার গৃহীত হয়েছে</span>
-      </a>
-      <a href="#service" class="marquee-item d-flex align-items-center gap-2 text-decoration-none">
-        <span>⚙️</span><span>সার্ভিস: রক্ষণাবেক্ষণ চলছে</span>
-      </a>
-      <a href="#delivery" class="marquee-item d-flex align-items-center gap-2 text-decoration-none">
-        <span>🚚</span><span>ডেলিভারি: ১ ঘণ্টায় পৌঁছতে পারে</span>
-      </a>
-      <a href="#uniko" class="marquee-item d-flex align-items-center gap-2 text-decoration-none">
-        <span>📢</span><span>Uniko Power — বিশ্বস্ত সেবা</span>
-      </a>
-
-      <!-- duplicate for seamless scroll -->
-      <a href="#update" class="marquee-item d-flex align-items-center gap-2 text-decoration-none">
-        <span>🔔</span><span>নতুন আপডেট: অর্ডার গৃহীত হয়েছে</span>
-      </a>
-      <a href="#service" class="marquee-item d-flex align-items-center gap-2 text-decoration-none">
-        <span>⚙️</span><span>সার্ভিস: রক্ষণাবেক্ষণ চলছে</span>
-      </a>
-      <a href="#delivery" class="marquee-item d-flex align-items-center gap-2 text-decoration-none">
-        <span>🚚</span><span>ডেলিভারি: ১ ঘণ্টায় পৌঁছতে পারে</span>
-      </a>
-      <a href="#uniko" class="marquee-item d-flex align-items-center gap-2 text-decoration-none">
-        <span>📢</span><span>Uniko Power — বিশ্বস্ত সেবা</span>
-      </a>
-    </div>
-  </div>
-</div>
-
