@@ -1,0 +1,80 @@
+.photo-gallery {
+  color: var(--text-primary);
+  background-color:var(--bg-primary);
+}
+
+.photo-gallery p {
+  color:#7d8285;
+}
+
+.photo-gallery h2 {
+  font-weight:bold;
+  margin-bottom:40px;
+  padding-top:40px;
+  color:inherit;
+}
+
+@media (max-width:767px) {
+  .photo-gallery h2 {
+    margin-bottom:25px;
+    padding-top:25px;
+    font-size:24px;
+  }
+}
+
+.photo-gallery .intro {
+  font-size:16px;
+  max-width:500px;
+  margin:0 auto 40px;
+}
+
+.photo-gallery .intro p {
+  margin-bottom:0;
+}
+
+.photo-gallery .photos {
+  padding-bottom:20px;
+}
+
+.photo-gallery .item {
+  padding-bottom:30px;
+}
+
+
+/* ✅ Blur Transparent Background */
+  .modal-backdrop.show {
+    backdrop-filter: blur(8px);
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  /* ✅ Dark/Light Theme */
+  [data-bs-theme="light"] .modal-content {
+    background-color: var(--light-bg-primary);
+    color: var(--light-text-primary);
+  }
+  [data-bs-theme="dark"] .modal-content {
+    background-color: var(--dark-bg-secondary);
+    color: var(--dark-text-primary);
+  }
+
+  /* ✅ Zoomable image */
+  .zoomable {
+    transition: transform 0.3s ease;
+    cursor: grab;
+  }
+
+  /* ✅ Mobile Responsive */
+  @media (max-width: 476px) {
+    .modal-dialog {
+      max-width: 95% !important;
+      margin: auto;
+    }
+    #modalImage {
+      max-height: 70vh;
+      object-fit: contain;
+    }
+    .modal-footer {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
