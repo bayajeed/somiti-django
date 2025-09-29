@@ -25,7 +25,6 @@
     <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
     
     <!-- Custom CSS -->
-    {% comment %} extra css {% endcomment %}
     {% block extra_css %} {% endblock %}
 
 </head>
@@ -69,5 +68,8 @@
 
     <!-- Main Script -->
     <script src="{% static 'assets/js/main.js' %}"></script>
+
+    {% block extra_js %} {% endblock %}
+
 </body>
 </html>

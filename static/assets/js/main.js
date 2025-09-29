@@ -354,3 +354,35 @@ function showSlider(type) {
 resetTimeAnimation();
 }
 
+
+
+
+
+// Video list with titles and descriptions
+// Video list with titles and descriptions
+  const videos = [
+    { id: "0fWtTwQ8fGQ", title: "First Video Title", desc: "This is the description for the first video." },
+    { id: "ScMzIvxBSi4", title: "Second Video Title", desc: "This is the description for the second video." },
+    { id: "u31qwQUeGuM", title: "Third Video Title", desc: "This is the description for the third video." }
+  ];
+
+  let index = 0;
+  const player = document.getElementById("player");
+  const videoTitle = document.getElementById("videoTitle");
+  const videoDesc = document.getElementById("videoDesc");
+
+  function loadVideo(i) {
+    player.src = `https://www.youtube.com/embed/${videos[i].id}?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0`;
+    videoTitle.textContent = videos[i].title;
+    videoDesc.textContent = videos[i].desc;
+  }
+
+  function nextVideo() {
+    index = (index + 1) % videos.length;
+    loadVideo(index);
+  }
+
+  function prevVideo() {
+    index = (index - 1 + videos.length) % videos.length;
+    loadVideo(index);
+  }
