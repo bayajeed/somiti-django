@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Uniko Power {% endblock %}
+
+
+
+{% block content %}
+
+  <nav class="navbar navbar-expand-lg border-bottom" style="background: var(--topbar-bg); color: var(--topbar-text)">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-white" href="{% url 'pages:home' %}">Mirpur Electric Somiti</a>
+      <div class="d-flex align-items-center gap-2">
+        <div class="me-3 d-none d-md-block small" style="color: var(--topbar-text)">Sodosso (সদস্য) List</div>
+        <button id="themeToggle" class="btn btn-sm btn-outline-light"><i class="bi bi-moon-stars"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="py-4">
+    <div class="container">
+      <div class="d-flex flex-column flex-md-row gap-3 align-items-center justify-content-between">
+        <div>
+          <h2 class="mb-0">Sodosso List</h2>
+          <p class="text-muted mb-0">Sundor, responsive member cards with search, filter and pagination.</p>
+        </div>
+        <form method="get" class="d-flex gap-2 align-items-center">
+          <input name="search" type="search" class="form-control search-input" placeholder="Search by name, role, area..." value="{{ search_query }}">
+          <select name="role" class="form-select" style="width:200px" onchange="this.form.submit()">
+            <option value="">All roles</option>
+            {% for value, label in role_choices %}
+            <option value="{{ value }}" {% if role_filter == value %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+          </select>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <main class="container pb-5">
+    <div class="row g-3">
+      {% for member in members %}
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card member-card shadow-sm h-100">
+          <div class="card-body d-flex flex-column text-center py-4">
+            <div class="d-flex justify-content-center mb-3">
+              <img src="{{ member.get_avatar_url }}" alt="{{ member.name }}" class="avatar">
+            </div>
+            <h6 class="mb-1">{{ member.name }}</h6>
+            <div class="text-muted small mb-2">{{ member.role }} • {{ member.area }}</div>
+            <p class="small text-muted mb-3 flex-grow-1">{{ member.bio|truncatewords:12 }}</p>
+            <div class="d-flex gap-2 justify-content-center">
+              <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#memberModal{{ member.id }}">
+                <i class="bi bi-person-lines-fill"></i> View
+              </button>
+              <a href="tel:{{ member.phone }}" class="btn btn-sm btn-outline-success"><i class="bi bi-telephone"></i></a>
+              <a href="mailto:{{ member.email }}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-envelope"></i></a>
+            </div>
+          </div>
+          <div class="card-footer bg-transparent border-0 text-center pb-3">
+            <span class="badge bg-light text-dark role-badge">{{ member.role }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal for each member -->
+      <div class="modal fade" id="memberModal{{ member.id }}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content" style="background: var(--bg-primary); color: var(--text-primary)">
+            <div class="modal-body p-4">
+              <div class="d-flex gap-3 align-items-center">
+                <img src="{{ member.get_avatar_url }}" alt="{{ member.name }}" class="avatar">
+                <div>
+                  <h5 class="mb-0">{{ member.name }}</h5>
+                  <div class="text-muted small">{{ member.role }}</div>
+                  <div class="text-muted small">{{ member.area }}</div>
+                </div>
+              </div>
+              <hr>
+              <p class="small text-muted">{{ member.bio }}</p>
+              <div class="d-flex gap-2 justify-content-end mt-3">
+                <a href="tel:{{ member.phone }}" class="btn btn-outline-primary btn-sm">
+                  <i class="bi bi-telephone"></i> Call
+                </a>
+                <a href="mailto:{{ member.email }}" class="btn btn-outline-secondary btn-sm">
+                  <i class="bi bi-envelope"></i> Email
+                </a>
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12">
+        <div class="alert alert-info text-center">No members found.</div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if members.has_other_pages %}
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center mt-4">
+        {% if members.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ members.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if role_filter %}&role={{ role_filter }}{% endif %}">Previous</a>
+        </li>
+        {% endif %}
+        
+        {% for num in members.paginator.page_range %}
+        <li class="page-item {% if members.number == num %}active{% endif %}">
+          <a class="page-link" href="?page={{ num }}{% if search_query %}&search={{ search_query }}{% endif %}{% if role_filter %}&role={{ role_filter }}{% endif %}">{{ num }}</a>
+        </li>
+        {% endfor %}
+        
+        {% if members.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ members.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if role_filter %}&role={{ role_filter }}{% endif %}">Next</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+	
+  </main>
+
+
+{% endblock %}

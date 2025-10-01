@@ -1,9 +1,17 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from . import views
+
+app_name = 'pages'  # For namespacing the URLs , use 'pages' as the app name, (jokhon urls template e use korbo tokhon pages:home etc hobe )
+
+# API Router for REST endpoints
+router = DefaultRouter()
+router.register(r'', views.MemberViewSet, basename='member-api')
 
 urlpatterns = [
     path('', views.home_view, name='home'),
     path('about/', views.about_view, name='about'),
+    path('sodosso/', views.sodosso_view, name='sodosso'),
     path('services/', views.services_view, name='services'),
     path('portfolio/', views.portfolio_view, name='portfolio'),
     path('ownership/', views.ownership_view, name='ownership'),
@@ -20,4 +28,16 @@ urlpatterns = [
     # path('notice-board/', views.notice_board_view, name='notice_board'),
     # path('gallery/', views.gallery_view, name='gallery'),
 
+
+
+    # ============= Template Views =============
+    path('list/', views.member_list_view, name='member_list'),
+    path('detail/<int:pk>/', views.member_detail_view, name='member_detail'),
+    
+    # ============= API Views =============
+    # All API endpoints will be under /members/api/
+    path('api/', include(router.urls)),
+
 ]
+
+

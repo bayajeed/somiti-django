@@ -5,7 +5,7 @@
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
-          <a href="{% url 'home' %}" class="logo d-flex align-items-center">
+          <a href="{% url 'pages:home' %}" class="logo d-flex align-items-center">
             <span class="sitename">Uniko Power</span>
           </a>
           <div class="footer-contact pt-3">
@@ -25,22 +25,22 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'about' %}">About us</a></li>
-            <li><a href="{% url 'services' %}">Services</a></li>
-            <li><a href="{% url 'ownership' %}">Ownership</a></li>
-            <li><a href="{% url 'blog-products' %}">blog-products</a></li>
+            <li><a href="{% url 'pages:home' %}">Home</a></li>
+            <li><a href="{% url 'pages:about' %}">About us</a></li>
+            <li><a href="{% url 'pages:services' %}">Services</a></li>
+            <li><a href="{% url 'pages:ownership' %}">Ownership</a></li>
+            <li><a href="{% url 'pages:blog-products' %}">blog-products</a></li>
           </ul>
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Our Services</h4>
           <ul>
-            <li><a href="{% url 'services' %}">Transformer</a></li>
-            <li><a href="{% url 'services' %}">Generator</a></li>
-            <li><a href="{% url 'services' %}">Lift</a></li>
-            <li><a href="{% url 'services' %}">Solar Panel</a></li>
-            <li><a href="{% url 'services' %}">Battery</a></li>
+            <li><a href="{% url 'pages:services' %}">Transformer</a></li>
+            <li><a href="{% url 'pages:services' %}">Generator</a></li>
+            <li><a href="{% url 'pages:services' %}">Lift</a></li>
+            <li><a href="{% url 'pages:services' %}">Solar Panel</a></li>
+            <li><a href="{% url 'pages:services' %}">Battery</a></li>
           </ul>
         </div>
 

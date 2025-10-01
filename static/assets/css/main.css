@@ -657,7 +657,7 @@
 }
 .item .content {
   position: absolute;
-  top: 50%;
+  top: 85%;
   left: 100px;
   transform: translateY(-50%);
   width: 400px;
@@ -734,8 +734,8 @@
 }
 .arrows {
   position: absolute;
-  top: 80%;
-  right: 52%;
+  top: 85%;
+  right: 45%;
   z-index: 100;
   width: 300px;
   max-width: 30%;
@@ -910,3 +910,13 @@
     }
 
 
+
+/* Member List Styles */
+
+.member-card {border-radius: var(--radius-lg); background: var(--bg-primary); transition:transform .18s ease, box-shadow .18s ease}
+.member-card:hover {transform:translateY(-6px); box-shadow:0 10px 30px var(--shadow-strong)}
+.avatar {width:96px;height:96px;border-radius:var(--radius-full);object-fit:cover;border:4px solid var(--bg-primary);box-shadow:0 6px 18px var(--shadow)}
+.role-badge {font-size:.72rem}
+.search-input {max-width:520px}
+.card-footer .btn {padding:.35rem .6rem}
+@media (max-width:576px){.avatar{width:88px;height:88px}}

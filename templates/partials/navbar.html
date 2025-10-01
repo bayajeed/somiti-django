@@ -5,7 +5,7 @@
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container">
             <!-- Brand Logo -->
-            <a class="navbar-brand" href="{% url 'home' %}">
+            <a class="navbar-brand" href="{% url 'pages:home' %}">
                 <div class="logo-icon">
                     <i class="bi bi-rocket-takeoff"></i>
                 </div>
@@ -22,7 +22,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">
+                        <a class="nav-link" href="{% url 'pages:home' %}">
                             <i class="bi bi-house-door"></i>
                             Home
                         </a>
@@ -49,6 +49,12 @@
                             </a></li>
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'pages:contact' %}">
+                            <i class="bi bi-house-door"></i>
+                            Committee
+                        </a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" 
                            data-bs-auto-close="outside" aria-expanded="false">
@@ -59,7 +65,7 @@
                             <li><a class="dropdown-item" href="#about">
                                 <i class="bi bi-info-circle"></i>Committee
                             </a></li>
-                            <li><a class="dropdown-item" href="#services">
+                            <li><a class="dropdown-item" href="{% url 'pages:sodosso' %}">
                                 <i class="bi bi-gear"></i>Member List
                             </a></li>
                             <li><a class="dropdown-item" href="#portfolio">
@@ -90,9 +96,9 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'contact' %}">
+                        <a class="nav-link" href="{% url 'pages:contact' %}">
                             <i class="bi bi-house-door"></i>
-                            Contuct Us
+                            Contact Us
                         </a>
                     </li>
                 </ul>
