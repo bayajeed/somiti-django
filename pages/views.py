@@ -20,7 +20,35 @@ def about_view(request):
     return render(request, 'pages/about.html')
 
 def sodosso_view(request):
-    return render(request, 'pages/sodosso-list.html')
+    members = Member.objects.filter(is_active=True)
+    
+    # Search functionality
+    search_query = request.GET.get('search', '')
+    if search_query:
+        members = members.filter(
+            Q(name__icontains=search_query) |
+            Q(role__icontains=search_query) |
+            Q(area__icontains=search_query) |
+            Q(bio__icontains=search_query)
+        )
+    
+    # Role filter
+    role_filter = request.GET.get('role', '')
+    if role_filter:
+        members = members.filter(role=role_filter)
+    
+    # Pagination
+    paginator = Paginator(members, 8)  # 8 members per page
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+    
+    context = {
+        'members': page_obj,
+        'search_query': search_query,
+        'role_filter': role_filter,
+        'role_choices': Member.ROLE_CHOICES,
+    }
+    return render(request, 'pages/sodosso-list.html', context)
 
 def services_view(request):
     return render(request, 'pages/services.html')
@@ -94,7 +122,7 @@ def member_list_view(request):
         'role_filter': role_filter,
         'role_choices': Member.ROLE_CHOICES,
     }
-    return render(request, 'members/member_list.html', context)
+    return render(request, 'pages/sodosso-list.html', context)
 
 def member_detail_view(request, pk):
     """
@@ -102,7 +130,7 @@ def member_detail_view(request, pk):
     """
     member = get_object_or_404(Member, pk=pk, is_active=True)
     context = {'member': member}
-    return render(request, 'members/member_detail.html', context)
+    return render(request, 'pages/sodosso-list.html', context)
 
 
 # ============= API Views =============
