@@ -1,65 +1,92 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %} Uniko Power {% endblock %}
-
-
+{% block title %} সদস্য তালিকা {% endblock %}
 
 {% block content %}
 
+<main class="container py-4">
 
-  <header class="py-4">
-    <div class="container">
-      <div class="d-flex flex-column flex-md-row gap-3 align-items-center justify-content-between">
-        <div>
-          <h2 class="mb-0">Sodosso List</h2>
-          <p class="text-muted mb-0">Sundor, responsive member cards with search, filter and pagination.</p>
-        </div>
-        <form method="get" class="d-flex gap-2 align-items-center">
-          <input name="search" type="search" class="form-control search-input" placeholder="Search by name, role, area..." value="{{ search_query }}">
-          <select name="role" class="form-select" style="width:200px" onchange="this.form.submit()">
-            <option value="">All roles</option>
-            {% for value, label in role_choices %}
-            <option value="{{ value }}" {% if role_filter == value %}selected{% endif %}>{{ label }}</option>
-            {% endfor %}
-          </select>
-        </form>
+  <!-- =================================== -->
+  <!-- ======== হেডার এবং ফিল্টার ======== -->
+  <!-- =================================== -->
+  <header class="mb-4">
+    <div class="d-flex flex-column flex-md-row gap-3 align-items-center justify-content-between">
+      
+      <!-- পেজের শিরোনাম -->
+      <div>
+        <h2 class="mb-0">সদস্য তালিকা</h2>
+        <p class="text-muted mb-0">সদস্যদের তথ্য, সার্চ, ফিল্টার এবং পেজিনেশন সহ।</p>
       </div>
+      
+      <!-- সার্চ এবং ফিল্টার ফরম -->
+      <form method="get" class="d-flex gap-2 align-items-center">
+        
+        <!-- সার্চ ইনপুট -->
+        <input 
+          name="search" 
+          type="search" 
+          class="form-control" 
+          placeholder="নাম, পদবি, এলাকা দিয়ে খুঁজুন..." 
+          value="{{ search_query }}"
+        >
+        
+        <!-- পদবি অনুযায়ী ফিল্টার (ড্রপডাউন) -->
+        <select name="role" class="form-select" style="width: 200px;" onchange="this.form.submit()">
+          <option value="">সকল পদবি</option>
+          {% for value, label in role_choices %}
+            <option value="{{ value }}" {% if role_filter == value %}selected{% endif %}>
+              {{ label }}
+            </option>
+          {% endfor %}
+        </select>
+
+      </form>
     </div>
   </header>
 
-  <main class="container pb-5">
-    <div class="row g-3">
-      {% for member in members %}
+  <!-- =================================== -->
+  <!-- ======== সদস্যদের তালিকা ======== -->
+  <!-- =================================== -->
+  <div class="row g-4">
+    {% for member in members %}
       <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-        <div class="card member-card shadow-sm h-100">
-          <div class="card-body d-flex flex-column text-center py-4">
-            <div class="d-flex justify-content-center mb-3">
-              <img src="{{ member.get_avatar_url }}" alt="{{ member.name }}" class="avatar">
-            </div>
+        <!-- সদস্যের কার্ড -->
+        <div class="card member-card shadow-sm h-100 text-center">
+          <div class="card-body d-flex flex-column py-4">
+            
+            <!-- সদস্যের ছবি -->
+            <img src="{{ member.get_avatar_url }}" alt="{{ member.name }}" class="avatar mx-auto mb-3">
+            
+            <!-- নাম, পদবি ও এলাকা -->
             <h6 class="mb-1">{{ member.name }}</h6>
             <div class="text-muted small mb-2">{{ member.role }} • {{ member.area }}</div>
+            
+            <!-- সংক্ষিপ্ত পরিচিতি -->
             <p class="small text-muted mb-3 flex-grow-1">{{ member.bio|truncatewords:12 }}</p>
+            
+            <!-- অ্যাকশন বাটন (View, Call, Email) -->
             <div class="d-flex gap-2 justify-content-center">
               <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#memberModal{{ member.id }}">
-                <i class="bi bi-person-lines-fill"></i> View
+                <i class="bi bi-person-lines-fill"></i> বিস্তারিত
               </button>
               <a href="tel:{{ member.phone }}" class="btn btn-sm btn-outline-success"><i class="bi bi-telephone"></i></a>
               <a href="mailto:{{ member.email }}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-envelope"></i></a>
             </div>
           </div>
-          <div class="card-footer bg-transparent border-0 text-center pb-3">
-            <span class="badge bg-light text-dark role-badge">{{ member.role }}</span>
-          </div>
         </div>
       </div>
 
-      <!-- Modal for each member -->
+      <!-- ================================================== -->
+      <!-- ======== সদস্যের বিস্তারিত তথ্যের মডাল ======== -->
+      <!-- ================================================== -->
       <div class="modal fade" id="memberModal{{ member.id }}" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content" style="background: var(--bg-primary); color: var(--text-primary)">
+          <div class="modal-content">
             <div class="modal-body p-4">
-              <div class="d-flex gap-3 align-items-center">
+              
+              <!-- মডালের হেডার -->
+              <div class="d-flex gap-3 align-items-center mb-3">
                 <img src="{{ member.get_avatar_url }}" alt="{{ member.name }}" class="avatar">
                 <div>
                   <h5 class="mb-0">{{ member.name }}</h5>
@@ -67,54 +94,88 @@
                   <div class="text-muted small">{{ member.area }}</div>
                 </div>
               </div>
+              
+              <!-- বিস্তারিত পরিচিতি -->
+              <p class="small">{{ member.bio }}</p>
               <hr>
-              <p class="small text-muted">{{ member.bio }}</p>
+              
+              <!-- মডালের বাটন -->
               <div class="d-flex gap-2 justify-content-end mt-3">
                 <a href="tel:{{ member.phone }}" class="btn btn-outline-primary btn-sm">
-                  <i class="bi bi-telephone"></i> Call
+                  <i class="bi bi-telephone"></i> কল করুন
                 </a>
                 <a href="mailto:{{ member.email }}" class="btn btn-outline-secondary btn-sm">
-                  <i class="bi bi-envelope"></i> Email
+                  <i class="bi bi-envelope"></i> ইমেইল করুন
                 </a>
-                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">বন্ধ করুন</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      {% empty %}
+      
+    {% empty %}
+      <!-- যদি কোনো সদস্য না পাওয়া যায় -->
       <div class="col-12">
-        <div class="alert alert-info text-center">No members found.</div>
+        <div class="alert alert-warning text-center">
+          কোনো সদস্য খুঁজে পাওয়া যায়নি।
+        </div>
       </div>
-      {% endfor %}
-    </div>
+    {% endfor %}
+  </div>
 
-    <!-- Pagination -->
-    {% if members.has_other_pages %}
-    <nav aria-label="Page navigation">
-      <ul class="pagination justify-content-center mt-4">
+  <!-- =================================== -->
+  <!-- =========== পেজিনেশন ============ -->
+  <!-- =================================== -->
+  {% if members.has_other_pages %}
+    <nav aria-label="Page navigation" class="mt-5">
+      <ul class="pagination justify-content-center">
+        
+        <!-- আগের পেজ (Previous) -->
         {% if members.has_previous %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ members.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if role_filter %}&role={{ role_filter }}{% endif %}">Previous</a>
-        </li>
+          <li class="page-item">
+            <a class="page-link" href="?page={{ members.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if role_filter %}&role={{ role_filter }}{% endif %}">
+              পূর্ববর্তী
+            </a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <span class="page-link">পূর্ববর্তী</span>
+          </li>
         {% endif %}
         
+        <!-- পেজ নম্বর -->
         {% for num in members.paginator.page_range %}
-        <li class="page-item {% if members.number == num %}active{% endif %}">
-          <a class="page-link" href="?page={{ num }}{% if search_query %}&search={{ search_query }}{% endif %}{% if role_filter %}&role={{ role_filter }}{% endif %}">{{ num }}</a>
-        </li>
+          {% if members.number == num %}
+            <li class="page-item active" aria-current="page">
+              <span class="page-link">{{ num }}</span>
+            </li>
+          {% else %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ num }}{% if search_query %}&search={{ search_query }}{% endif %}{% if role_filter %}&role={{ role_filter }}{% endif %}">
+                {{ num }}
+              </a>
+            </li>
+          {% endif %}
         {% endfor %}
         
+        <!-- পরের পেজ (Next) -->
         {% if members.has_next %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ members.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if role_filter %}&role={{ role_filter }}{% endif %}">Next</a>
-        </li>
+          <li class="page-item">
+            <a class="page-link" href="?page={{ members.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if role_filter %}&role={{ role_filter }}{% endif %}">
+              পরবর্তী
+            </a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <span class="page-link">পরবর্তী</span>
+          </li>
         {% endif %}
+        
       </ul>
     </nav>
-    {% endif %}
-	
-  </main>
-
+  {% endif %}
+  
+</main>
 
 {% endblock %}

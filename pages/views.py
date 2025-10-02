@@ -1,3 +1,4 @@
+# pages/views.py
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -12,91 +13,52 @@ from .serializers import (
     MemberDetailSerializer
 )
 
+# ==============================================
+# ========== সাধারণ টেমপ্লেট ভিউ (Template Views) ===========
+# ==============================================
+
+# --- প্রধান পেজগুলোর জন্য ভিউ --- 
 
 def home_view(request):
+    """ হোমপেজ রেন্ডার করে। """
     return render(request, 'home.html')
 
 def about_view(request):
+    """ About পেজ রেন্ডার করে। """
     return render(request, 'pages/about.html')
 
-def sodosso_view(request):
-    members = Member.objects.filter(is_active=True)
-    
-    # Search functionality
-    search_query = request.GET.get('search', '')
-    if search_query:
-        members = members.filter(
-            Q(name__icontains=search_query) |
-            Q(role__icontains=search_query) |
-            Q(area__icontains=search_query) |
-            Q(bio__icontains=search_query)
-        )
-    
-    # Role filter
-    role_filter = request.GET.get('role', '')
-    if role_filter:
-        members = members.filter(role=role_filter)
-    
-    # Pagination
-    paginator = Paginator(members, 8)  # 8 members per page
-    page_number = request.GET.get('page', 1)
-    page_obj = paginator.get_page(page_number)
-    
-    context = {
-        'members': page_obj,
-        'search_query': search_query,
-        'role_filter': role_filter,
-        'role_choices': Member.ROLE_CHOICES,
-    }
-    return render(request, 'pages/sodosso-list.html', context)
-
 def services_view(request):
+    """ Services পেজ রেন্ডার করে। """
     return render(request, 'pages/services.html')
 
 def portfolio_view(request):
+    """ Portfolio পেজ রেন্ডার করে। """
     return render(request, 'pages/portfolio.html')
 
 def ownership_view(request):
+    """ Ownership পেজ রেন্ডার করে। """
     return render(request, 'pages/ownership.html')
 
 def blog_view(request):
+    """ Blog পেজ রেন্ডার করে। """
     return render(request, 'pages/blog/blog-products.html')
 
 def contact_view(request):
+    """ Contact পেজ রেন্ডার করে। """
     return render(request, 'pages/contact.html')
 
-def history_view(request):
-    return render(request, 'pages/history.html')
-def mission_vision_view(request):
-    return render(request, 'pages/mission_vision.html')
-def activities_view(request):
-    return render(request, 'pages/activities.html')
-def member_list_view(request):
-    return render(request, 'pages/member_list.html')
-def membership_rules_view(request):
-    return render(request, 'pages/membership_rules.html')
-def news_events_view(request):
-    return render(request, 'pages/news_events.html')
-def latest_news_view(request):
-    return render(request, 'pages/latest_news.html')
-def upcoming_events_view(request):
-    return render(request, 'pages/upcoming_events.html')
-def notice_board_view(request):
-    return render(request, 'pages/notice_board.html')
-def gallery_view(request):
-    return render(request, 'pages/gallery.html')
-# Add more view functions as needed
 
+# --- সদস্যদের তালিকা এবং বিস্তারিত তথ্যের জন্য ভিউ --- 
 
-
-# ============= Template Views =============
-def member_list_view(request):
+def sodosso_view(request):
     """
-    Traditional Django template view for member list
+    সদস্যদের তালিকা দেখানোর জন্য এই ভিউ ব্যবহার করা হয়।
+    এতে সার্চ, ফিল্টারিং এবং পেজিনেশন কার্যকারিতা অন্তর্ভুক্ত রয়েছে।
     """
+    # শুধুমাত্র সক্রিয় সদস্যদের দেখানো হবে।
     members = Member.objects.filter(is_active=True)
     
-    # Search functionality
+    # সার্চ কার্যকারিতা: নাম, পদবি, এলাকা বা বায়ো দিয়ে সার্চ করা যাবে।
     search_query = request.GET.get('search', '')
     if search_query:
         members = members.filter(
@@ -106,56 +68,63 @@ def member_list_view(request):
             Q(bio__icontains=search_query)
         )
     
-    # Role filter
+    # পদবি অনুযায়ী ফিল্টারিং।
     role_filter = request.GET.get('role', '')
     if role_filter:
         members = members.filter(role=role_filter)
     
-    # Pagination
-    paginator = Paginator(members, 8)  # 8 members per page
+    # পেজিনেশন: প্রতি পেজে ৮ জন সদস্য দেখানো হবে।
+    paginator = Paginator(members, 8)
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
     
     context = {
-        'members': page_obj,
-        'search_query': search_query,
-        'role_filter': role_filter,
-        'role_choices': Member.ROLE_CHOICES,
+        'members': page_obj, # পেজিনেটেড সদস্য তালিকা
+        'search_query': search_query, # সার্চের জন্য ব্যবহৃত শব্দ
+        'role_filter': role_filter, # ফিল্টারিংয়ের জন্য ব্যবহৃত পদবি
+        'role_choices': Member.ROLE_CHOICES, # ফিল্টার ড্রপডাউনের জন্য পদবি তালিকা
     }
     return render(request, 'pages/sodosso-list.html', context)
 
 def member_detail_view(request, pk):
     """
-    Detail view for a single member
+    একজন নির্দিষ্ট সদস্যের বিস্তারিত তথ্য দেখানোর জন্য এই ভিউ।
     """
     member = get_object_or_404(Member, pk=pk, is_active=True)
     context = {'member': member}
-    return render(request, 'pages/sodosso-list.html', context)
+    return render(request, 'pages/sodosso-list.html', context) # Note: আপনি এখানেও sodosso-list.html ব্যবহার করেছেন।
 
 
-# ============= API Views =============
+# ====================================================
+# ========== API ভিউসেট (DRF API ViewSet) ============
+# ====================================================
+
 class MemberViewSet(viewsets.ModelViewSet):
     """
-    API ViewSet for Member CRUD operations
-    
-    Endpoints:
-    - GET /api/members/ - List all members
-    - POST /api/members/ - Create new member
-    - GET /api/members/{id}/ - Retrieve member detail
-    - PUT /api/members/{id}/ - Update member
-    - PATCH /api/members/{id}/ - Partial update
-    - DELETE /api/members/{id}/ - Delete member
-    - GET /api/members/by_role/?role=President - Filter by role
+    সদস্যদের জন্য একটি সম্পূর্ণ CRUD (Create, Read, Update, Delete) API।
+    DRF (Django Rest Framework) ব্যবহার করে এটি তৈরি করা হয়েছে।
+
+    সাধারণ এন্ডপয়েন্টগুলো:
+    - GET /api/members/ -> সকল সদস্যের তালিকা ( সংক্ষিপ্ত )
+    - POST /api/members/ -> নতুন সদস্য তৈরি
+    - GET /api/members/{id}/ -> নির্দিষ্ট সদস্যের বিস্তারিত তথ্য
+    - PUT /api/members/{id}/ -> সদস্যের তথ্য আপডেট
+    - DELETE /api/members/{id}/ -> সদস্যকে ডিলেট
     """
     queryset = Member.objects.filter(is_active=True)
-    permission_classes = [AllowAny]  # Change as needed
-    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['name', 'role', 'area', 'bio']
-    ordering_fields = ['name', 'role', 'joined_date']
-    ordering = ['role', 'name']
+    permission_classes = [AllowAny]  # API অ্যাক্সেসের জন্য অনুমতি ( আপাতত সবার জন্য খোলা )
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter] # সার্চ এবং অর্ডারিং সুবিধা যোগ করা হয়েছে
+    search_fields = ['name', 'role', 'area', 'bio'] # কোন কোন ফিল্ডে সার্চ করা যাবে
+    ordering_fields = ['name', 'role', 'joined_date'] # কোন কোন ফিল্ড অনুযায়ী সাজানো যাবে
+    ordering = ['role', 'name'] # ডিফল্ট অর্ডারিং
     
     def get_serializer_class(self):
-        """Return appropriate serializer based on action"""
+        """
+        অ্যাকশন অনুযায়ী সঠিক সিরিয়ালাইজার ক্লাস রিটার্ন করে।
+        - `list` অ্যাকশনের জন্য: `MemberListSerializer` (সংক্ষিপ্ত তথ্য)
+        - `retrieve` অ্যাকশনের জন্য: `MemberDetailSerializer` (বিস্তারিত তথ্য)
+        - অন্য সব অ্যাকশনের জন্য: `MemberSerializer` (সম্পূর্ণ তথ্য)
+        """
         if self.action == 'list':
             return MemberListSerializer
         elif self.action == 'retrieve':
@@ -164,26 +133,30 @@ class MemberViewSet(viewsets.ModelViewSet):
     
     def get_queryset(self):
         """
-        Override to add custom filtering
+        API অনুরোধ অনুযায়ী কোয়েরিসেট ফিল্টার করার জন্য এই মেথডটি ওভাররাইড করা হয়েছে।
+        URL প্যারামিটার (e.g., `?role=President`) অনুযায়ী ফিল্টার করা যাবে।
         """
         queryset = super().get_queryset()
         
-        # Filter by role
+        # পদবি (`role`) অনুযায়ী ফিল্টার
         role = self.request.query_params.get('role', None)
         if role:
             queryset = queryset.filter(role=role)
         
-        # Filter by area
+        # এলাকা (`area`) অনুযায়ী ফিল্টার
         area = self.request.query_params.get('area', None)
         if area:
             queryset = queryset.filter(area__icontains=area)
         
         return queryset
     
-    @action(detail=False, methods=['get'])
+    # --- কাস্টম API এন্ডপয়েন্ট --- 
+
+    @action(detail=False, methods=['get'], url_path='by-role')
     def by_role(self, request):
         """
-        Custom endpoint: /api/members/by_role/?role=President
+        পদবি অনুযায়ী সদস্যদের তালিকা পাওয়ার জন্য একটি কাস্টম এন্ডপয়েন্ট।
+        এন্ডপয়েন্ট: GET /api/members/by-role/?role=President
         """
         role = request.query_params.get('role', None)
         if not role:
@@ -193,24 +166,24 @@ class MemberViewSet(viewsets.ModelViewSet):
             )
         
         members = self.get_queryset().filter(role=role)
+        # `get_serializer` ব্যবহার করে সঠিক সিরিয়ালাইজার পাওয়া যায়।
         serializer = self.get_serializer(members, many=True)
         return Response(serializer.data)
     
-    @action(detail=False, methods=['get'])
+    @action(detail=False, methods=['get']) 
     def roles(self, request):
         """
-        Get all available roles
-        Endpoint: /api/members/roles/
+        সিস্টেমে উপলব্ধ সকল পদবি তালিকা পাওয়ার জন্য একটি এন্ডপয়েন্ট।
+        এন্ডপয়েন্ট: GET /api/members/roles/
         """
-        roles = [{'value': choice[0], 'label': choice[1]} 
-                for choice in Member.ROLE_CHOICES]
+        roles = [{'value': choice[0], 'label': choice[1]} for choice in Member.ROLE_CHOICES]
         return Response(roles)
     
-    @action(detail=True, methods=['post'])
+    @action(detail=True, methods=['post'], url_path='toggle-active')
     def toggle_active(self, request, pk=None):
         """
-        Toggle member active status
-        Endpoint: POST /api/members/{id}/toggle_active/
+        একজন সদস্যের `is_active` স্ট্যাটাস পরিবর্তন (toggle) করার জন্য।
+        এন্ডপয়েন্ট: POST /api/members/{id}/toggle-active/
         """
         member = self.get_object()
         member.is_active = not member.is_active
