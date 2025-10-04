@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %} সদস্য তালিকা {% endblock %}
+{% block title %} Somiti Sodosso{% endblock %}
 
 {% block content %}
 
@@ -15,7 +15,7 @@
       
       <!-- পেজের শিরোনাম -->
       <div>
-        <h2 class="mb-0">সদস্য তালিকা</h2>
+        <h2 class="mb-0">Sodosso List</h2>
         <p class="text-muted mb-0">সদস্যদের তথ্য, সার্চ, ফিল্টার এবং পেজিনেশন সহ।</p>
       </div>
       
@@ -27,13 +27,13 @@
           name="search" 
           type="search" 
           class="form-control" 
-          placeholder="নাম, পদবি, এলাকা দিয়ে খুঁজুন..." 
+          placeholder="Name, Role, Area... search করুন" 
           value="{{ search_query }}"
         >
         
         <!-- পদবি অনুযায়ী ফিল্টার (ড্রপডাউন) -->
         <select name="role" class="form-select" style="width: 200px;" onchange="this.form.submit()">
-          <option value="">সকল পদবি</option>
+          <option value="">All roles</option>
           {% for value, label in role_choices %}
             <option value="{{ value }}" {% if role_filter == value %}selected{% endif %}>
               {{ label }}
@@ -68,7 +68,7 @@
             <!-- অ্যাকশন বাটন (View, Call, Email) -->
             <div class="d-flex gap-2 justify-content-center">
               <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#memberModal{{ member.id }}">
-                <i class="bi bi-person-lines-fill"></i> বিস্তারিত
+                <i class="bi bi-person-lines-fill"></i> View
               </button>
               <a href="tel:{{ member.phone }}" class="btn btn-sm btn-outline-success"><i class="bi bi-telephone"></i></a>
               <a href="mailto:{{ member.email }}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-envelope"></i></a>
@@ -102,12 +102,12 @@
               <!-- মডালের বাটন -->
               <div class="d-flex gap-2 justify-content-end mt-3">
                 <a href="tel:{{ member.phone }}" class="btn btn-outline-primary btn-sm">
-                  <i class="bi bi-telephone"></i> কল করুন
+                  <i class="bi bi-telephone"></i> Call
                 </a>
                 <a href="mailto:{{ member.email }}" class="btn btn-outline-secondary btn-sm">
-                  <i class="bi bi-envelope"></i> ইমেইল করুন
+                  <i class="bi bi-envelope"></i> Email
                 </a>
-                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">বন্ধ করুন</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
@@ -135,12 +135,12 @@
         {% if members.has_previous %}
           <li class="page-item">
             <a class="page-link" href="?page={{ members.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if role_filter %}&role={{ role_filter }}{% endif %}">
-              পূর্ববর্তী
+              Previous
             </a>
           </li>
         {% else %}
           <li class="page-item disabled">
-            <span class="page-link">পূর্ববর্তী</span>
+            <span class="page-link">Previous</span>
           </li>
         {% endif %}
         
@@ -163,12 +163,12 @@
         {% if members.has_next %}
           <li class="page-item">
             <a class="page-link" href="?page={{ members.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if role_filter %}&role={{ role_filter }}{% endif %}">
-              পরবর্তী
+              Next
             </a>
           </li>
         {% else %}
           <li class="page-item disabled">
-            <span class="page-link">পরবর্তী</span>
+            <span class="page-link">Next</span>
           </li>
         {% endif %}
         

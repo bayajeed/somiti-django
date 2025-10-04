@@ -39,9 +39,9 @@ class Member(models.Model):
         verbose_name='Phone' # ফোন নম্বর (ইন্টারন্যাশনাল ফরম্যাটে
     )
     email = models.EmailField(verbose_name='E-mail', blank=True, null=True) # ইমেইল অপশনাল করা হয়েছে
-    
-    # === অতিরিক্ত তথ্য ===
-    bio = models.TextField(blank=True, verbose_name='সংক্ষিপ্ত পরিচয়')
+
+    # === Additional Information ===
+    bio = models.TextField(blank=True, verbose_name='Short Introduction') # সংক্ষিপ্ত পরিচিতি (অপশনাল)
     image = models.ImageField(
         upload_to='members/', 
         blank=True, 
@@ -63,9 +63,9 @@ class Member(models.Model):
         - verbose_name_plural: অ্যাডমিন প্যানেলে মডেলের প্লুরাল নাম 'সদস্যগণ' হিসেবে দেখাবে।
         """
         ordering = ['role', 'name']
-        verbose_name = 'সদস্য'
-        verbose_name_plural = 'সদস্যগণ'
-    
+        verbose_name = 'Member'
+        verbose_name_plural = 'Members'
+
     def __str__(self):
         """
         অবজেক্টকে স্ট্রিং হিসেবে প্রকাশ করার জন্য। 
