@@ -1,6 +1,19 @@
 # pages/models.py
+from datetime import datetime
 from django.db import models
 from django.core.validators import RegexValidator
+
+from io import BytesIO
+from PIL import Image
+from django.core.files.base import ContentFile
+import os
+
+# সদস্যের ইমেজ আপলোড পাথ কাস্টমাইজ করার জন্য ফাংশন
+def member_image_upload_path(instance, filename):
+    # শুধু ফাইলের নাম রেখে দিচ্ছি, যাতে আগের path যোগ না হয়
+    filename = os.path.basename(filename)
+    # এখন শুধু এইরকম path হবে: members/<role>/<filename>
+    return f"members/{instance.role}/{filename}"
 
 class Member(models.Model):
     """
@@ -41,9 +54,9 @@ class Member(models.Model):
     email = models.EmailField(verbose_name='E-mail', blank=True, null=True) # ইমেইল অপশনাল করা হয়েছে
 
     # === Additional Information ===
-    bio = models.TextField(blank=True, verbose_name='Short Introduction') # সংক্ষিপ্ত পরিচিতি (অপশনাল)
+    bio = models.TextField(blank=True, verbose_name='Short Description') # সংক্ষিপ্ত বর্ণনা (অপশনাল)
     image = models.ImageField(
-        upload_to='members/', 
+        upload_to=member_image_upload_path,
         blank=True, 
         null=True,
         verbose_name='Image' # প্রোফাইল ছবি (অপশনাল)
@@ -62,7 +75,7 @@ class Member(models.Model):
         - verbose_name: অ্যাডমিন প্যানেলে মডেলের সিঙ্গুলার নাম 'সদস্য' হিসেবে দেখাবে।
         - verbose_name_plural: অ্যাডমিন প্যানেলে মডেলের প্লুরাল নাম 'সদস্যগণ' হিসেবে দেখাবে।
         """
-        ordering = ['role', 'name']
+        ordering = ['id' ,'role', 'name']
         verbose_name = 'Member'
         verbose_name_plural = 'Members'
 
@@ -71,7 +84,7 @@ class Member(models.Model):
         অবজেক্টকে স্ট্রিং হিসেবে প্রকাশ করার জন্য। 
         অ্যাডমিন প্যানেল এবং অন্যান্য জায়গায় সদস্যের নাম ও পদবি দেখানো হবে।
         """
-        return f"{self.name} - {self.role}"
+        return f"{self.id} - {self.name} - {self.role}"
     
     def get_avatar_url(self):
         """
@@ -81,3 +94,41 @@ class Member(models.Model):
             return self.image.url
         # একটি ডিফল্ট অ্যাভাটার ইমেজ প্রদান করা হয়েছে
         return 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=200&h=200&auto=format&fit=crop&crop=faces'
+    
+    # count of all active members
+
+
+    # ইমেজ কনভার্সন এবং সাইজ কমানোর জন্য save মেথড ওভাররাইড করা হয়েছে
+    def save(self, *args, **kwargs):
+        # প্রথমে instance টি normal ভাবে save করুন
+        super().save(*args, **kwargs)
+
+        # এখন image থাকলে কনভার্ট করুন
+        if self.image:
+            img_path = self.image.path
+            img = Image.open(img_path)
+
+            # WEBP ফরম্যাটে কনভার্ট করা
+            webp_io = BytesIO()
+            img.save(webp_io, format='WEBP', quality=85)
+
+            # filename rename: username + timestamp
+            timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+            username = self.name.replace(" ", "_")
+            new_filename = f"{username}_{timestamp}.webp"
+
+            # final path: members/<role>/<filename>
+            upload_path = f"members/{self.role}/{new_filename}"
+
+            # image save
+            self.image.save(upload_path, ContentFile(webp_io.getvalue()), save=False)
+
+            # আগের ফাইল ডিলিট (optional)
+            try:
+                if os.path.exists(img_path):
+                    os.remove(img_path)
+            except Exception:
+                pass
+
+            super().save(*args, **kwargs)
+

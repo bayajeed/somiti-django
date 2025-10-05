@@ -74,7 +74,7 @@ def sodosso_view(request):
         members = members.filter(role=role_filter)
 
     # members = members.order_by('id')  # আইডি অনুযায়ী সাজানো হবে।
-    members = members.order_by('name', 'role')  # পদবি এবং নাম অনুযায়ী সাজানো হবে।
+    # members = members.order_by('role', 'id', 'name')  # আইডি, পদবি এবং নাম অনুযায়ী সাজানো হবে।
 
     # পেজিনেশন: প্রতি পেজে ৮ জন সদস্য দেখানো হবে।
     paginator = Paginator(members, 8)
